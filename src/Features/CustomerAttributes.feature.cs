@@ -161,7 +161,7 @@ namespace src.Features
                             "1",
                             "20190104",
                             "20190104",
-                            "0"});
+                            "1"});
 #line 10
         testRunner.And("the table \'DimCustomerAccountAttributes\' on the workbench contains the data:", ((string)(null)), table2, "And ");
 #line hidden
@@ -206,6 +206,106 @@ namespace src.Features
 #line 20
         testRunner.Then("the table \'DimCustomerAttributes\' on the workbench should only contain the data w" +
                         "ithout strict ordering:", ((string)(null)), table5, "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("CA003 Existing customer has an order, now has new order")]
+        public virtual void CA003ExistingCustomerHasAnOrderNowHasNewOrder()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("CA003 Existing customer has an order, now has new order", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 25
+    this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+                TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Comment",
+                            "DimLatestCustomerAccountSKey [int]",
+                            "FirstOrderReceiptID [int]",
+                            "FirstOrderCustomerOrderReference [nvarchar]",
+                            "Last24MonthsOrderCount [int]"});
+                table6.AddRow(new string[] {
+                            "Existing Account with 1 order",
+                            "1",
+                            "1",
+                            "Ref1",
+                            "1"});
+#line 26
+        testRunner.Given("the customer has an existing order:", ((string)(null)), table6, "Given ");
+#line hidden
+                TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Comment",
+                            "DimCustomerAccountSKey [int]",
+                            "FirstOrderReceiptID [int]",
+                            "FirstOrderCustomerOrderReference [nvarchar]",
+                            "FirstOrderDimOrderCreatedDateSKey [int]",
+                            "FirstOrderDimOrderCreatedTimeSKey [int]",
+                            "FirstOrderDimBilledDateSKey [int]",
+                            "FirstOrderDimShippedDateSKey [int]",
+                            "Last24MonthsOrderCount [int]"});
+                table7.AddRow(new string[] {
+                            "Existing Customer with 1 new order",
+                            "1",
+                            "2",
+                            "Ref2",
+                            "20190406",
+                            "1",
+                            "20190106",
+                            "20190106",
+                            "1"});
+#line 29
+        testRunner.And("the customer places an order within the last 24 months:", ((string)(null)), table7, "And ");
+#line hidden
+                TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                            "ParameterName",
+                            "Value",
+                            "Type"});
+                table8.AddRow(new string[] {
+                            "TriggerId",
+                            "12345678-1234-1234-1234-123456789123",
+                            "System.String"});
+                table8.AddRow(new string[] {
+                            "RunId",
+                            "12345678-1234-1234-1234-123456789123",
+                            "System.String"});
+#line 32
+        testRunner.When("the \'PopulateDimCustomerAttributes\' proc with params on workbench is executed:", ((string)(null)), table8, "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Comment",
+                            "DimLatestCustomerAccountSKey [int]",
+                            "FirstOrderReceiptID [int]",
+                            "FirstOrderCustomerOrderReference [nvarchar]",
+                            "Last24MonthsOrderCount [int]"});
+                table9.AddRow(new string[] {
+                            "Updated record with 1 new order",
+                            "1",
+                            "1",
+                            "Ref1",
+                            "2"});
+#line 36
+        testRunner.Then("the table \'DimCustomerAttributes\' on the workbench should only contain the data w" +
+                        "ithout strict ordering:", ((string)(null)), table9, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

@@ -33,11 +33,27 @@ namespace DataServices
         {
             _db.Truncate("DimCustomerAccount");
         }
+        
+        [Given(@"the customer has an existing order:")]
+        public void GivenTheCustomerHasAnExistingOrder(TypedTable expectedRows)
+        {
+            var expectedResults = expectedRows.ToDictionaries().ToList();
+            expectedResults.Sort(DictionariesComparator.CompareTo);
+
+            var actualResults = _db.ReadAll("DimCustomerAttributes")
+                .Select(dic => dic
+                    .Where(d => expectedRows.Header.Contains(d.Key))
+                    .ToDictionary(d => d.Key, d => d.Value))
+                .ToList();
+            actualResults.Sort(DictionariesComparator.CompareTo);
+
+            actualResults.Should().BeEquivalentTo(expectedResults
+            );
+        }
 
         [Given(@"the table 'DimCustomerAttributes' on the workbench contains the data:")]
         public void GivenCustomerAttributesContainsTheData(TypedTable tableContents)
         {
-
             var tableEnum = tableContents.ToDictionaries().ToList();
             _db.Insert("DimCustomerAttributes", tableEnum);
         }
@@ -45,7 +61,6 @@ namespace DataServices
         [Given(@"the table 'DimCustomerAccountAttributes' on the workbench contains the data:")]
         public void GivenCustomerAccountAttributesContainsTheData(TypedTable tableContents)
         {
-
             var tableEnum = tableContents.ToDictionaries().ToList();
             _db.Insert("DimCustomerAccountAttributes", tableEnum);
         }
@@ -53,11 +68,18 @@ namespace DataServices
         [Given(@"the table 'DimCustomerAccount' on the workbench contains the data:")]
         public void GivenCustomerAccountContainsTheData(TypedTable tableContents)
         {
-
             var tableEnum = tableContents.ToDictionaries().ToList();
             _db.Insert("DimCustomerAccount", tableEnum);
         }
 
+        [Given(@"the customer places an order within the last 24 months:")]
+        public void GivenCustomerPlacesANewOrderWithin24Months(TypedTable tableContents)
+        {
+            var tableEnum = tableContents.ToDictionaries().ToList();
+            _db.Insert("DimCustomerAccountAttributes", tableEnum);
+        }
+
+   
         [When(@"the 'PopulateDimCustomerAttributes' proc with params on workbench is executed:")]
         public void WhenTheProcWithParamsOnIsExecuted(Table parametersTable)
         {
@@ -74,7 +96,6 @@ namespace DataServices
             var expectedResults = expectedRows.ToDictionaries().ToList();
             expectedResults.Sort(DictionariesComparator.CompareTo);
 
-
             var actualResults = _db.ReadAll("DimCustomerAttributes")
                 .Select(dic => dic
                     .Where(d => expectedRows.Header.Contains(d.Key))
@@ -82,8 +103,7 @@ namespace DataServices
                 .ToList();
             actualResults.Sort(DictionariesComparator.CompareTo);
 
-            actualResults.Should().BeEquivalentTo(expectedResults
-            );
+            actualResults.Should().BeEquivalentTo(expectedResults);
         }
 
     }
