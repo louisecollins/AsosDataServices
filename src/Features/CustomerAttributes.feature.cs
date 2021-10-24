@@ -274,7 +274,7 @@ namespace src.Features
                             "20190106",
                             "1"});
 #line 29
-        testRunner.And("the customer places an order within the last 24 months:", ((string)(null)), table7, "And ");
+        testRunner.And("the customer places 1 or more orders within the last 24 months:", ((string)(null)), table7, "And ");
 #line hidden
                 TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                             "ParameterName",
@@ -306,6 +306,233 @@ namespace src.Features
 #line 36
         testRunner.Then("the table \'DimCustomerAttributes\' on the workbench should only contain the data w" +
                         "ithout strict ordering:", ((string)(null)), table9, "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("CA004 Existing customer has orders across multiple accounts, group all orders acr" +
+            "oss accounts")]
+        public virtual void CA004ExistingCustomerHasOrdersAcrossMultipleAccountsGroupAllOrdersAcrossAccounts()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("CA004 Existing customer has orders across multiple accounts, group all orders acr" +
+                    "oss accounts", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 41
+    this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 42
+        testRunner.Given("there are no existing customer accounts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+                TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Comment",
+                            "DimLatestCustomerAccountSKey [int]",
+                            "FirstOrderReceiptID [int]",
+                            "FirstOrderCustomerOrderReference [nvarchar]",
+                            "FirstOrderDimBilledDateSKey [int]",
+                            "FirstOrderDimShippedDateSKey [int]",
+                            "FirstOrderDimCustomerAgeSKey [int]",
+                            "FirstOrderCustomerAge [int]",
+                            "FirstOrderDimAffiliateSKey [int]",
+                            "FirstOrderDimDiscountSKey [int]",
+                            "FirstOrderDimOrderCreatedDateSKey [int]",
+                            "FirstOrderDimOrderCreatedTimeSKey [int]",
+                            "Last24MonthsOrderCount [int]"});
+                table10.AddRow(new string[] {
+                            "No orders",
+                            "1",
+                            "-1",
+                            "UNK",
+                            "-1",
+                            "-1",
+                            "-1",
+                            "0",
+                            "-1",
+                            "-1",
+                            "-1",
+                            "-1",
+                            "0"});
+#line 43
+        testRunner.And("the customer opens a new account:", ((string)(null)), table10, "And ");
+#line hidden
+                TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Comment",
+                            "DimCustomerAccountSKey [int]",
+                            "FirstOrderReceiptID [int]",
+                            "FirstOrderCustomerOrderReference [nvarchar]",
+                            "FirstOrderDimOrderCreatedDateSKey [int]",
+                            "FirstOrderDimOrderCreatedTimeSKey [int]",
+                            "FirstOrderDimBilledDateSKey [int]",
+                            "FirstOrderDimShippedDateSKey [int]",
+                            "Last24MonthsOrderCount [int]"});
+                table11.AddRow(new string[] {
+                            "Existing Customer with 1 new order",
+                            "1",
+                            "1",
+                            "Ref1",
+                            "20190107",
+                            "1",
+                            "20190107",
+                            "20190107",
+                            "1"});
+                table11.AddRow(new string[] {
+                            "Existing Customer with 1 new order",
+                            "1",
+                            "2",
+                            "Ref2",
+                            "20190406",
+                            "1",
+                            "20190106",
+                            "20190106",
+                            "1"});
+                table11.AddRow(new string[] {
+                            "Existing Customer with 1 new order",
+                            "1",
+                            "3",
+                            "Ref3",
+                            "20190805",
+                            "1",
+                            "20190105",
+                            "20190105",
+                            "1"});
+#line 46
+        testRunner.And("the customer places 1 or more orders within the last 24 months:", ((string)(null)), table11, "And ");
+#line hidden
+                TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Comment",
+                            "DimCustomerAccountSKey [int]",
+                            "DimLatestCustomerAccountSKey [int]"});
+                table12.AddRow(new string[] {
+                            "",
+                            "1",
+                            "1"});
+#line 51
+        testRunner.And("the table \'DimCustomerAccount\' on the workbench contains the data:", ((string)(null)), table12, "And ");
+#line hidden
+                TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Comment",
+                            "DimLatestCustomerAccountSKey [int]",
+                            "FirstOrderReceiptID [int]",
+                            "FirstOrderCustomerOrderReference [nvarchar]",
+                            "FirstOrderDimBilledDateSKey [int]",
+                            "FirstOrderDimShippedDateSKey [int]",
+                            "FirstOrderDimCustomerAgeSKey [int]",
+                            "FirstOrderCustomerAge [int]",
+                            "FirstOrderDimAffiliateSKey [int]",
+                            "FirstOrderDimDiscountSKey [int]",
+                            "FirstOrderDimOrderCreatedDateSKey [int]",
+                            "FirstOrderDimOrderCreatedTimeSKey [int]",
+                            "Last24MonthsOrderCount [int]"});
+                table13.AddRow(new string[] {
+                            "No orders",
+                            "2",
+                            "-1",
+                            "UNK",
+                            "-1",
+                            "-1",
+                            "-1",
+                            "0",
+                            "-1",
+                            "-1",
+                            "-1",
+                            "-1",
+                            "0"});
+#line 54
+        testRunner.And("the customer opens a new account:", ((string)(null)), table13, "And ");
+#line hidden
+                TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Comment",
+                            "DimCustomerAccountSKey [int]",
+                            "FirstOrderReceiptID [int]",
+                            "FirstOrderCustomerOrderReference [nvarchar]",
+                            "FirstOrderDimOrderCreatedDateSKey [int]",
+                            "FirstOrderDimOrderCreatedTimeSKey [int]",
+                            "FirstOrderDimBilledDateSKey [int]",
+                            "FirstOrderDimShippedDateSKey [int]",
+                            "Last24MonthsOrderCount [int]"});
+                table14.AddRow(new string[] {
+                            "Existing Customer with 1 new order",
+                            "2",
+                            "4",
+                            "Ref4",
+                            "20200415",
+                            "1",
+                            "20200415",
+                            "20200415",
+                            "1"});
+                table14.AddRow(new string[] {
+                            "Existing Customer with 1 new order",
+                            "2",
+                            "5",
+                            "Ref5",
+                            "20200519",
+                            "1",
+                            "20200519",
+                            "20200519",
+                            "1"});
+                table14.AddRow(new string[] {
+                            "Existing Customer with 1 new order",
+                            "2",
+                            "6",
+                            "Ref6",
+                            "20200620",
+                            "1",
+                            "20200620",
+                            "20200620",
+                            "1"});
+#line 57
+        testRunner.And("the customer places 1 or more orders within the last 24 months:", ((string)(null)), table14, "And ");
+#line hidden
+                TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Comment",
+                            "DimCustomerAccountSKey [int]",
+                            "DimLatestCustomerAccountSKey [int]"});
+                table15.AddRow(new string[] {
+                            "",
+                            "2",
+                            "2"});
+#line 62
+        testRunner.And("the table \'DimCustomerAccount\' on the workbench contains the data:", ((string)(null)), table15, "And ");
+#line hidden
+#line 65
+        testRunner.And("the customers accounts have been grouped:", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+                TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
+                            "ParameterName",
+                            "Value",
+                            "Type"});
+                table16.AddRow(new string[] {
+                            "TriggerId",
+                            "12345678-1234-1234-1234-123456789123",
+                            "System.String"});
+                table16.AddRow(new string[] {
+                            "RunId",
+                            "12345678-1234-1234-1234-123456789123",
+                            "System.String"});
+#line 66
+        testRunner.When("the \'PopulateDimCustomerAttributes\' proc with params on workbench is executed:", ((string)(null)), table16, "When ");
+#line hidden
+#line 70
+        testRunner.Then("all orders of the same customer across accounts are aggregated together:", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
